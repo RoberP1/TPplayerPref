@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d7147e8ceaf8f94186f29cc58c27866, type: 3}
   m_Name: Subtitle 3
   m_EditorClassIdentifier: 
-  time: 3
-  duration: 5
-  subtitle: que
+  time: 10.14
+  duration: 3.1599998
+  subtitle: "For my mind to run around with my ear up to the ground\r"

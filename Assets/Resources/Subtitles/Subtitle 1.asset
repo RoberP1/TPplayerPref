@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d7147e8ceaf8f94186f29cc58c27866, type: 3}
   m_Name: Subtitle 1
   m_EditorClassIdentifier: 
-  time: 7
-  duration: 5
-  subtitle: tal
+  time: 4.22
+  duration: 2.88
+  subtitle: "(Look out for yourself)\r"

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Subtitle", menuName = "Subtitle")]
-public class subtitleClass : ScriptableObject
+public class SubtitleClass : ScriptableObject
 {
     public float time;
     public float duration;

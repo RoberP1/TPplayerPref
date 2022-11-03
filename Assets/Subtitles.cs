@@ -5,11 +5,11 @@ using System.Linq;
 
 public class Subtitles : MonoBehaviour
 {
-    public subtitleClass[] subtitlesArray;
+    public SubtitleClass[] subtitlesArray;
 
     private void Awake()
     {
-        subtitlesArray = Resources.LoadAll<subtitleClass>("Subtitles");
+        subtitlesArray = Resources.LoadAll<SubtitleClass>("Subtitles");
 
         subtitlesArray.OrderBy(x => x.time);
     }

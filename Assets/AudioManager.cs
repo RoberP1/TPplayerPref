@@ -8,7 +8,7 @@ public class AudioManager : MonoBehaviour
 {
     AudioSource audioSource;
     public TextMeshProUGUI subTitle;
-    public subtitleClass[] subtitlesArray;
+    public SubtitleClass[] subtitlesArray;
 
     void Awake()
     {
@@ -17,34 +17,32 @@ public class AudioManager : MonoBehaviour
         audioSource.mute = PlayerPrefs.GetInt("Mute", 0) == 1;
         audioSource.time = PlayerPrefs.GetFloat("AudioTime", 0f);
         
-        subtitlesArray = Resources.LoadAll<subtitleClass>("Subtitles");
+        subtitlesArray = Resources.LoadAll<SubtitleClass>("Subtitles");
 
         subtitlesArray.OrderBy(x => x.time);
 
         audioSource.Play();
     }
-
-    private void Update()
+    private void Start()
     {
-        //Debug.Log(audioSource.time);
-        AudioSubTitles(audioSource.time);
+        StartCoroutine(Subtitle(0));
+    }
+    public void SaveAudioTime()
+    {
         PlayerPrefs.SetFloat("AudioTime", audioSource.time);
     }
-
     public void AudioSubTitles(float time)
     {
-        if (subtitlesArray.FirstOrDefault(x => x.time <= time && x.time + x.duration > time ) != null)
-        {
-            subTitle.text = subtitlesArray.FirstOrDefault(x => x.time <= time && x.time + x.duration > time).subtitle;
-        }
-        else
-        {
-            subTitle.text = "";
-        }
-    }
-    
-    private void OnDestroy()
-    {
+        SubtitleClass nextSubtitle = subtitlesArray.FirstOrDefault(x => x.time <= time && x.time + x.duration >= time);
         
+        subTitle.text = (nextSubtitle != null) ? nextSubtitle.subtitle : "";
+   
+        float duration = (nextSubtitle != null) ? nextSubtitle.time + nextSubtitle.duration - time : 0.1f;
+        StartCoroutine(Subtitle(duration));
+    }
+    IEnumerator Subtitle(float time)
+    {
+        yield return new WaitForSeconds(time);
+        AudioSubTitles(audioSource.time);
     }
 }
