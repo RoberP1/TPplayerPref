@@ -9,7 +9,7 @@ public class AudioManager : MonoBehaviour
     AudioSource audioSource;
     public TextMeshProUGUI subTitle;
     public SubtitleClass[] subtitlesArray;
-
+    public float timeBetweenSubtitles;
     void Awake()
     {
         audioSource = GetComponent<AudioSource>();
@@ -50,7 +50,7 @@ public class AudioManager : MonoBehaviour
             ? nextSubtitle.time + nextSubtitle.duration - time 
             : 0.1f;
         
-        StartCoroutine(Subtitle(duration));
+        StartCoroutine(Subtitle(timeBetweenSubtitles));
     }
     IEnumerator Subtitle(float time)
     {
