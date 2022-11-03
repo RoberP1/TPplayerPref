@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Subtitle 32
   m_EditorClassIdentifier: 
   time: 99.71
-  duration: 1
+  duration: 4
   subtitle: "My enemy-y-y-y-y\r"
