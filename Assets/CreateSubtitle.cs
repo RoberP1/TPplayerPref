@@ -1,37 +1,41 @@
 using System.Linq;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class CreateSubtitle : MonoBehaviour
 {
     public TextAsset textFile;
+
     List<string> lines = new List<string>();
+
     public List<SubtitleClass> subtitleClasses = new List<SubtitleClass>();
+
+         // 2:52 song finish time
+    public float previousTime = 2 * 60 + 52;
+
     private void Start()
     {
-        //textFile = Resources.Load<TextAsset>("Lyric");
+        lines = textFile.text.Split('\n').ToList();
     }
     public void CreateSubtitles()
     {
-        lines = textFile.text.Split('\n').ToList();
-
-        float previousTime = 2 * 60 + 52;
-
         for (int i = lines.Count - 1; i >= 0; i--)
         {
-            //create in resources folder
-
-
+            //split time
             string time = lines[i].Split(']')[0];
             time = time.Replace("[", "");
             string[] timeArray = time.Split(':', '.');
-            float timeFloat = float.Parse(timeArray[0]) * 60 + float.Parse(timeArray[1]) + float.Parse(timeArray[2]) / 100;
+            
+            float timeFloat = float.Parse(timeArray[0]) * 60 + float.Parse(timeArray[1]) 
+                                + float.Parse(timeArray[2]) / 100;
+
+            //set time
             subtitleClasses[i].time = timeFloat;
             subtitleClasses[i].duration =  previousTime - timeFloat;
-            Debug.Log(timeFloat + " " + subtitleClasses[i].duration);
+
+            //split and set text
             subtitleClasses[i].subtitle = lines[i].Split(']')[1];
-            Debug.Log(subtitleClasses[i].subtitle);
+            
             previousTime = timeFloat;
         }        
     }
