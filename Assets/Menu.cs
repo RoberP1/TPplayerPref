@@ -4,20 +4,28 @@ public class Menu : MonoBehaviour
 {
     public Slider volumeSlider;
     public Toggle muteToggle;
-    void Start()
-    {
-        LoadPref();
-    }
-
+    private bool IsMutting;
+    void Start() => LoadPref();
     private void LoadPref()
     {
         volumeSlider.value = PlayerPrefs.GetFloat("Volume", 1f);
         muteToggle.isOn = PlayerPrefs.GetInt("Mute", 0) == 1;
     }
 
-    public void ChangeVolume() =>
+    public void ChangeVolume() {
+        if (IsMutting)
+        {
+            IsMutting = false;
+            return;
+        }
         PlayerPrefs.SetFloat("Volume", volumeSlider.value);
-    public void OnMuteChange() => 
-        PlayerPrefs.SetInt("Mute", muteToggle.isOn ? 1 : 0);    
+        muteToggle.isOn = false;
+    }
+public void OnMuteChange()
+    {
+        PlayerPrefs.SetInt("Mute", muteToggle.isOn ? 1 : 0);
+        IsMutting = true;
+        volumeSlider.value = muteToggle.isOn ? 0 : PlayerPrefs.GetFloat("Volume", 1f);
+    }
     
 }
