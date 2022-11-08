@@ -36,7 +36,6 @@ public class AudioManager : MonoBehaviour
     }
     public void SaveAudioTime() => 
         PlayerPrefs.SetFloat("AudioTime", audioSource.time);
-    
     public void AudioSubTitles(float time)
     {
         //find subtitle
