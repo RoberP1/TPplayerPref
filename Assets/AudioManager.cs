@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System.Linq;
@@ -30,10 +29,7 @@ public class AudioManager : MonoBehaviour
         audioSource.time = PlayerPrefs.GetFloat("AudioTime", 0f);
     }
 
-    private void Start()
-    {
-        StartCoroutine(Subtitle(0));
-    }
+    private void Start() => StartCoroutine(Subtitle(0));
     public void SaveAudioTime() => 
         PlayerPrefs.SetFloat("AudioTime", audioSource.time);
     public void AudioSubTitles(float time)

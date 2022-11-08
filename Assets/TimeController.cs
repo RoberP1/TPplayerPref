@@ -7,12 +7,8 @@ public class TimeController : MonoBehaviour
 {
     public AudioSource audioSource;
     public Slider sliderController;
-    public void OnChangeValue()
-    {
+    public void OnChangeValue() =>
         audioSource.time = sliderController.value * audioSource.clip.length;
-    }
-    private void Update()
-    {
+    private void Update() =>
         sliderController.value = audioSource.time / audioSource.clip.length;
-    }
 }
