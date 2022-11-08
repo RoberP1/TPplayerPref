@@ -52,4 +52,5 @@ public class AudioManager : MonoBehaviour
         yield return new WaitForSeconds(time);
         AudioSubTitles(audioSource.time);
     }
+    private void OnApplicationQuit() => SaveAudioTime();
 }

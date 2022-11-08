@@ -5,6 +5,7 @@ public class Menu : MonoBehaviour
     public Slider volumeSlider;
     public Toggle muteToggle;
     private bool IsMutting;
+    
     void Start() => LoadPref();
     private void LoadPref()
     {
@@ -13,13 +14,11 @@ public class Menu : MonoBehaviour
 
         SavePref();
     }
-
     private void SavePref()
     {
         PlayerPrefs.SetFloat("Volume", volumeSlider.value);
         PlayerPrefs.SetInt("Mute", muteToggle.isOn ? 1 : 0);
     }
-
     public void ChangeVolume() {
         if (IsMutting)
         {
@@ -36,12 +35,10 @@ public class Menu : MonoBehaviour
         volumeSlider.value = muteToggle.isOn ? 0 : PlayerPrefs.GetFloat("Volume", 1f);
     }
     public void ResetAudioTime() => PlayerPrefs.SetFloat("AudioTime", 0f);
-    
     public void DefaultValues()
     {
         PlayerPrefs.DeleteKey("Volume");
         PlayerPrefs.DeleteKey("Mute");
         LoadPref();
     }
-
 }
